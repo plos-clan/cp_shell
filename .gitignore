@@ -1,0 +1,22 @@
+# Clangd cache
+/.cache
+
+# Xmake cache
+/.xmake
+/build
+/compile_commands.json
+
+# Disk cache
+*.qcow2
+
+# IDE Config
+.idea
+.vscode
+cmake-build-debug/
+
+# MacOS Cache
+.DS_Store
+
+# Compiled Apps
+*.elf
+

@@ -1,0 +1,3 @@
+[submodule "submod/libpl_readline"]
+	path = submod/libpl_readline
+	url = git@github.com:plos-clan/pl_readline.git
