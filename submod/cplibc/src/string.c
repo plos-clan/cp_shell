@@ -1,5 +1,6 @@
 #include "string.h"
 #include "stdio.h"
+#include "stdlib.h"
 
 int memcmp(const void *a_, const void *b_, size_t size) {
     const char *a = a_;
@@ -258,4 +259,43 @@ char *strrchr(const char *s, int c) {
         s++;
     }
     return (c == '\0') ? (char *)s : last;
+}
+
+char *strdup(const char *str) {
+    if (str == NULL) return NULL;
+
+    char *strat = (char *)str;
+    int   len   = 0;
+    while (*str++ != '\0')
+        len++;
+    char *ret = (char *)malloc(len + 1);
+
+    while ((*ret++ = *strat++) != '\0') {}
+
+    return ret - (len + 1);
+}
+
+void* memmove(void* dest, const void* src, size_t n) {
+    unsigned char* d = (unsigned char*)dest;
+    const unsigned char* s = (const unsigned char*)src;
+
+    printf("memmove: %p %p %zu\n", d, s, n);
+
+    if (d == s || n == 0) {
+        return dest; // nothing to do
+    }
+
+    if (d < s || d >= (s + n)) {
+        // No overlap, or dest before src: safe to copy forward
+        for (size_t i = 0; i < n; ++i) {
+            d[i] = s[i];
+        }
+    } else {
+        // Overlap: copy backwards
+        for (size_t i = n; i > 0; --i) {
+            d[i - 1] = s[i - 1];
+        }
+    }
+
+    return dest;
 }

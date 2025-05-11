@@ -2,9 +2,7 @@
 
 #include "stdint.h"
 #include "stddef.h"
-
-typedef unsigned long long ssize_t;
-typedef ssize_t     isize;
+#include "stdlib.h"
 
 #define __syscall0(id)                                                                             \
     ({                                                                                             \
@@ -100,6 +98,8 @@ typedef ssize_t     isize;
 // plos-clan 通用系统调用编号定义
 #define SYSCALL_EXIT    0
 #define SYSCALL_ABORT   1
+#define SYSCALL_MMAP    2
+
 #define SYSCALL_WAITPID 7
 #define SYSCALL_OPEN    8
 #define SYSCALL_CLOSE   9

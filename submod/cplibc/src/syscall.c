@@ -8,13 +8,17 @@ _Noreturn void exit(int code){
 }
 
 int open(const char*path){
-    __syscall(8,path);
+    __syscall(SYSCALL_OPEN,path);
 }
 
 int write(int handle,uint8_t *buf,int len){
-    return __syscall(12,handle,buf,len);
+    return __syscall(SYSCALL_WRITE,handle,buf,len);
 }
 
 int read(int handle,uint8_t *buf,int len){
-    return __syscall(10,handle,buf,len);
+    return __syscall(SYSCALL_READ,handle,buf,len);
+}
+
+void mmap(void *addr,size_t length,uint64_t prot,uint64_t flags){
+    __syscall(SYSCALL_MMAP,addr,length,prot,flags);
 }

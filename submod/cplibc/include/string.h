@@ -24,6 +24,7 @@ int64_t strtol(const char *str, char **endptr, int base);
 
 char *strchrnul(const char *s, int c);
 
+#undef isspace
 int isspace(int c);
 
 char *strchr(const char *s, int c);
@@ -33,3 +34,5 @@ char *strncpy(char *dest, const char *src, size_t n);
 char *strrchr(const char *s, int c);
 
 char *strtok(char *str, const char *delim);
+
+char *strdup(const char *str);

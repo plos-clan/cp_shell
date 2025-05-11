@@ -11,22 +11,30 @@ extern int main(int argc, char**argv);
 extern "C" {
 #endif
 
+extern void init_heap();
+
 int stdout;
 int stdin;
 
-int printf(const char *fmt, ...) {
-    char buf[1024];
-    va_list args;
-    va_start(args, fmt);
-    int len = stbsp_vsprintf(buf, fmt, args);
-    va_end(args);
-    write(stdout, buf, len);
-    return len;
+void puts(const char *s) {
+    write(stdout, (uint8_t *)s, strlen(s));
+}
+
+void putc(const char c) {
+    char cp = c;
+    write(stdout, (uint8_t*)&cp, 1);
+}
+
+int getchar(){
+    char c;
+    read(stdin, (uint8_t*)&c, 1);
+    return c;
 }
 
 void _start() {
     stdout = open("/dev/stdout");
     stdin = open("/dev/stdin");
+    init_heap();
 
     int exit_code = main(0, "");
     exit(exit_code);
