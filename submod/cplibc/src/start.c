@@ -25,15 +25,23 @@ void putc(const char c) {
     write(stdout, (uint8_t*)&cp, 1);
 }
 
+void putchar(const char c){
+    char cp = c;
+    write(stdout, (uint8_t*)&cp, 1);
+}
+
 int getchar(){
     char c;
     read(stdin, (uint8_t*)&c, 1);
+    char buf[2] = {0};
+    buf[0] = c;
+    debug_print(&buf);
     return c;
 }
 
 void _start() {
-    stdout = open("/dev/stdout");
-    stdin = open("/dev/stdin");
+    stdout = open("/dev/stdio");
+    stdin = open("/dev/stdio");
     init_heap();
 
     int exit_code = main(0, "");

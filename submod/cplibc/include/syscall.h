@@ -99,9 +99,12 @@
 #define SYSCALL_EXIT    0
 #define SYSCALL_ABORT   1
 #define SYSCALL_MMAP    2
-
+#define SYSCALL_SIGRET  5
+#define SYSCALL_SIGNAL  6
 #define SYSCALL_WAITPID 7
 #define SYSCALL_OPEN    8
 #define SYSCALL_CLOSE   9
 #define SYSCALL_READ    10
 #define SYSCALL_WRITE   12
+
+#define SYSCALL_DEBUG_PRINT 200

@@ -275,26 +275,40 @@ char *strdup(const char *str) {
     return ret - (len + 1);
 }
 
-void* memmove(void* dest, const void* src, size_t n) {
-    unsigned char* d = (unsigned char*)dest;
-    const unsigned char* s = (const unsigned char*)src;
+#ifdef __GNUC__
+typedef __attribute__((__may_alias__)) size_t WT;
+#define WS (sizeof(WT))
+#endif
 
-    printf("memmove: %p %p %zu\n", d, s, n);
+void *memmove(void *dest, const void *src, size_t n){
+    char *d = dest;
+    const char *s = src;
 
-    if (d == s || n == 0) {
-        return dest; // nothing to do
-    }
+    if (d==s) return d;
+    if ((uintptr_t)s-(uintptr_t)d-n <= -2*n) return memcpy(d, s, n);
 
-    if (d < s || d >= (s + n)) {
-        // No overlap, or dest before src: safe to copy forward
-        for (size_t i = 0; i < n; ++i) {
-            d[i] = s[i];
-        }
+    if (d<s) {
+#ifdef __GNUC__
+        if ((uintptr_t)s % WS == (uintptr_t)d % WS) {
+			while ((uintptr_t)d % WS) {
+				if (!n--) return dest;
+				*d++ = *s++;
+			}
+			for (; n>=WS; n-=WS, d+=WS, s+=WS) *(WT *)d = *(WT *)s;
+		}
+#endif
+        for (; n; n--) *d++ = *s++;
     } else {
-        // Overlap: copy backwards
-        for (size_t i = n; i > 0; --i) {
-            d[i - 1] = s[i - 1];
-        }
+#ifdef __GNUC__
+        if ((uintptr_t)s % WS == (uintptr_t)d % WS) {
+			while ((uintptr_t)(d+n) % WS) {
+				if (!n--) return dest;
+				d[n] = s[n];
+			}
+			while (n>=WS) n-=WS, *(WT *)(d+n) = *(WT *)(s+n);
+		}
+#endif
+        while (n) n--, d[n] = s[n];
     }
 
     return dest;

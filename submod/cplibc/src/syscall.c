@@ -1,6 +1,7 @@
 #include "stdint.h"
 #include "syscall.h"
 #include "posix.h"
+#include "string.h"
 
 _Noreturn void exit(int code){
     __syscall(0,code);
@@ -21,4 +22,12 @@ int read(int handle,uint8_t *buf,int len){
 
 void mmap(void *addr,size_t length,uint64_t prot,uint64_t flags){
     __syscall(SYSCALL_MMAP,addr,length,prot,flags);
+}
+
+void signal_register(int sig,void (*handler)(void)){
+    __syscall(SYSCALL_SIGNAL,sig,handler);
+}
+
+void debug_print(char *str){
+    __syscall(SYSCALL_DEBUG_PRINT,str,strlen(str));
 }

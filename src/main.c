@@ -2,6 +2,7 @@
 #include "pl_readline.h"
 #include "shell.h"
 #include "string.h"
+#include "posix.h"
 
 #ifndef GIT_VERSION
 #    define GIT_VERSION "unknown"
@@ -42,14 +43,23 @@ static int cmd_parse(const char *cmd_str, char **argv,
     return argc;
 }
 
+void int_handle(){
+    printf("Signal Interrupt.\n");
+}
+
 int main(int argc, char**argv){
+    signal_register(SIGINT,int_handle);
+    while (true);
+
     printf("Welcome to CoolPotOS Shell (git:%s)\n", GIT_VERSION);
     printf("Type 'help' to see the list of commands.\n\n");
     pl_readline_t pl = setup_readline();
+    uint8_t *argv0[MAX_ARG_NR];
+
     while (true){
         const char *cmd = pl_readline(pl, "Shell > ");
         if (cmd[0] == 0) continue;
-        int argc = cmd_parse(cmd, (char **)argv, ' ');
+        int argc = cmd_parse(cmd, (char **)argv0, ' ');
 
         if (argc == -1) {
             printf("shell: number of arguments exceed MAX_ARG_NR(30)");
