@@ -40,8 +40,7 @@ int getchar(){
 }
 
 void _start() {
-    stdout = open("/dev/stdio");
-    stdin = open("/dev/stdio");
+    stdin = stdout = open("/dev/stdio");
     init_heap();
 
     int exit_code = main(0, "");

@@ -48,9 +48,6 @@ void int_handle(){
 }
 
 int main(int argc, char**argv){
-    signal_register(SIGINT,int_handle);
-    while (true);
-
     printf("Welcome to CoolPotOS Shell (git:%s)\n", GIT_VERSION);
     printf("Type 'help' to see the list of commands.\n\n");
     pl_readline_t pl = setup_readline();
