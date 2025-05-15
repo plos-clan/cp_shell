@@ -47,8 +47,10 @@ void int_handle(){
     printf("Signal Interrupt.\n");
 }
 
+extern int stdin;
+
 int main(int argc, char**argv){
-    printf("Welcome to CoolPotOS Shell (git:%s)\n", GIT_VERSION);
+    printf("Welcome to CoolPotOS Shell (git:%s) %d\n", GIT_VERSION);
     printf("Type 'help' to see the list of commands.\n\n");
     pl_readline_t pl = setup_readline();
     uint8_t *argv0[MAX_ARG_NR];
@@ -64,11 +66,11 @@ int main(int argc, char**argv){
         }
         if (argc == 0) continue;
 
-        int cmd_index = find_cmd(argv[0]);
+        int cmd_index = find_cmd(argv0[0]);
         if (cmd_index < 0) {
             printf("Command not found.\n\n");
         } else {
-            builtin_cmds[cmd_index].func(argc, (char **)argv);
+            builtin_cmds[cmd_index].func(argc, (char **)argv0);
         }
     }
     return 0;
