@@ -18,6 +18,8 @@ int stdin;
 
 void puts(const char *s) {
     write(stdout, (uint8_t *)s, strlen(s));
+    char cp = '\n';
+    write(stdout, (uint8_t*)&cp, 1);
 }
 
 void putc(const char c) {

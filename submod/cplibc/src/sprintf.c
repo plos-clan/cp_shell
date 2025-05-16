@@ -16,7 +16,7 @@ int sprintf(char *buf, char const *fmt, ...) {
 }
 
 int printf(const char *fmt, ...) {
-    char buf[1024];
+    char buf[2048];
     va_list args;
     va_start(args, fmt);
     int len = stbsp_vsprintf(buf, fmt, args);

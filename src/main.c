@@ -50,8 +50,8 @@ void int_handle(){
 extern int stdin;
 
 int main(int argc, char**argv){
-    printf("Welcome to CoolPotOS Shell (git:%s) %d\n", GIT_VERSION);
-    printf("Type 'help' to see the list of commands.\n\n");
+    printf("Welcome to CoolPotOS Shell (git:%s)\n", GIT_VERSION);
+    printf("Type 'help' to see the list of commands.\n");
     pl_readline_t pl = setup_readline();
     uint8_t *argv0[MAX_ARG_NR];
 

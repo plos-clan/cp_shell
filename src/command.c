@@ -12,7 +12,7 @@ const int builtin_cmd_num = sizeof(builtin_cmds) / sizeof(builtin_cmd_t);
 void print_help() {
     printf("Usage <command|app_path> [argument...]\n");
     printf("help                     Get shell help info.\n");
-    printf("shutdown exit            Shutdown kernel.\n");
+    printf("exit                     Shutdown kernel.\n");
     printf("reboot                   Restart kernel.\n");
     printf("lspci                    List all PCI/PCIE devices.\n");
     printf("sysinfo                  Get system info.\n");
