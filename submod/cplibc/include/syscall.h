@@ -7,7 +7,7 @@
 #define __syscall0(id)                                                                             \
     ({                                                                                             \
         ssize_t rets;                                                                              \
-        __asm__ volatile("int $0x80\n\t" : "=a"(rets) : "0"(id) : "memory", "cc");                   \
+        __asm__ volatile("syscall\n\t" : "=a"(rets) : "0"(id) : "memory", "cc");                   \
         rets;                                                                                      \
     })
 
@@ -16,7 +16,7 @@
         ssize_t          rets;                                                                     \
         ssize_t          __arg1             = (ssize_t)(arg1);                                     \
         register ssize_t _a1 __asm__("rdi") = __arg1;                                              \
-        __asm__ volatile("int $0x80\n\t" : "=a"(rets) : "0"(id), "r"(_a1) : "memory", "cc");         \
+        __asm__ volatile("syscall\n\t" : "=a"(rets) : "0"(id), "r"(_a1) : "memory", "cc");         \
         rets;                                                                                      \
     })
 
@@ -27,7 +27,7 @@
         ssize_t          __arg2             = (ssize_t)(arg2);                                     \
         register ssize_t _a2 __asm__("rsi") = __arg2;                                              \
         register ssize_t _a1 __asm__("rdi") = __arg1;                                              \
-        __asm__ volatile("int $0x80\n\t"                                                             \
+        __asm__ volatile("syscall\n\t"                                                             \
                          : "=a"(rets)                                                              \
                          : "0"(id), "r"(_a1), "r"(_a2)                                             \
                          : "memory", "cc");                                                        \
@@ -43,7 +43,7 @@
         register ssize_t _a3 __asm__("rdx") = __arg3;                                              \
         register ssize_t _a2 __asm__("rsi") = __arg2;                                              \
         register ssize_t _a1 __asm__("rdi") = __arg1;                                              \
-        __asm__ volatile("int $0x80\n\t"                                                             \
+        __asm__ volatile("syscall\n\t"                                                             \
                          : "=a"(rets)                                                              \
                          : "0"(id), "r"(_a1), "r"(_a2), "r"(_a3)                                   \
                          : "memory", "cc");                                                        \
@@ -61,7 +61,7 @@
         register ssize_t _a3 __asm__("rdx") = __arg3;                                              \
         register ssize_t _a2 __asm__("rsi") = __arg2;                                              \
         register ssize_t _a1 __asm__("rdi") = __arg1;                                              \
-        __asm__ volatile("int $0x80\n\t"                                                             \
+        __asm__ volatile("syscall\n\t"                                                             \
                          : "=a"(rets)                                                              \
                          : "0"(id), "r"(_a1), "r"(_a2), "r"(_a3), "r"(_a4)                         \
                          : "memory", "cc");                                                        \
@@ -81,7 +81,7 @@
         register ssize_t _a3 __asm__("rdx") = __arg3;                                              \
         register ssize_t _a2 __asm__("rsi") = __arg2;                                              \
         register ssize_t _a1 __asm__("rdi") = __arg1;                                              \
-        __asm__ volatile("int $0x80\n\t"                                                             \
+        __asm__ volatile("syscall\n\t"                                                             \
                          : "=a"(rets)                                                              \
                          : "0"(id), "r"(_a1), "r"(_a2), "r"(_a3), "r"(_a4), "r"(_a5)               \
                          : "memory", "cc");                                                        \
@@ -103,7 +103,7 @@
         register ssize_t _a3 __asm__("rdx") = __arg3;                                              \
         register ssize_t _a2 __asm__("rsi") = __arg2;                                              \
         register ssize_t _a1 __asm__("rdi") = __arg1;                                              \
-        __asm__ volatile("int $0x80\n\t"                                                             \
+        __asm__ volatile("syscall\n\t"                                                             \
                          : "=a"(rets)                                                              \
                          : "0"(id), "r"(_a1), "r"(_a2), "r"(_a3), "r"(_a4), "r"(_a5), "r"(_a6)     \
                          : "memory", "cc");                                                        \
@@ -118,24 +118,24 @@
     __syscall_concat(__syscall, __syscall_argn(__VA_ARGS__))(id, ##__VA_ARGS__)
 
 // plos-clan 通用系统调用编号定义
-#define SYSCALL_EXIT       0
-#define SYSCALL_ABORT      1
-#define SYSCALL_MMAP       2
-#define SYSCALL_SIGRET     5
+#define SYSCALL_READ       0
+#define SYSCALL_WRITE      1
+#define SYSCALL_OPEN       2
+#define SYSCALL_CLOSE      3
+#define SYSCALL_STAT       4
 #define SYSCALL_SIGNAL     6
 #define SYSCALL_WAITPID    7
-#define SYSCALL_OPEN       8
-#define SYSCALL_CLOSE      9
-#define SYSCALL_READ       10
-#define SYSCALL_SIZE       11
-#define SYSCALL_WRITE      12
-#define SYSCALL_GETPID     13
-#define SYSCALL_PRCTL      14
-#define SYSCALL_CLONE      15
-#define SYSCALL_ARCH_PRCTL 16
-#define SYSCALL_YIELD      17
-#define SYSCALL_IOCTL      54
+#define SYSCALL_MMAP       9
+#define SYSCALL_SIGRET     15
+#define SYSCALL_IOCTL      16
+#define SYSCALL_YIELD      24
+#define SYSCALL_NANO_SLEEP 35
+#define SYSCALL_GETPID     39
+#define SYSCALL_CLONE      56
+#define SYSCALL_ABORT      59
+#define SYSCALL_EXIT       60
 #define SYSCALL_UNAME      63
-#define SYSCALL_NANO_SLEEP 162
+#define SYSCALL_PRCTL      157
+#define SYSCALL_ARCH_PRCTL 158
 
 #define SYSCALL_DEBUG_PRINT 200

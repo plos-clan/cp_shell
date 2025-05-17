@@ -38,11 +38,18 @@
 #include "stdint.h"
 #include "stddef.h"
 
-int open(const char*path);
-int write(int handle,uint8_t *buf,int len);
-int read(int handle,uint8_t *buf,int len);
-void mmap(void *addr,size_t length,uint64_t prot,uint64_t flags,int fd,uint64_t offset);
-void signal_register(int sig,void (*handler)(void));
+int open(const char *path);
+
+int write(int handle, uint8_t *buf, int len);
+
+int read(int handle, uint8_t *buf, int len);
+
+void *mmap(void *addr, size_t length, uint64_t prot, uint64_t flags, int fd, uint64_t offset);
+
+void signal_register(int sig, void (*handler)(void));
+
 void *arch_prctl(int code, void *addr);
+
 void yield();
+
 void debug_print(char *str);
