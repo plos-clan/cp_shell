@@ -3,6 +3,7 @@ add_rules("mode.debug", "mode.release")
 set_languages("clatest")
 set_warnings("all", "extra")
 add_requires("pl_readline main")
+set_policy("package.install_locally", true)
 
 target("cplibc")
     set_kind("static")
