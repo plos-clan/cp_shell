@@ -3,8 +3,8 @@
 #include "stdlib.h"
 
 builtin_cmd_t builtin_cmds[] = {
-        {"help",     (void (*)(int, char **))print_help },
-        {"exit",     (void (*)(int, char **))shell_exit},
+    {"help", (void (*)(int, char **))print_help},
+    {"exit", (void (*)(int, char **))shell_exit},
 };
 
 const int builtin_cmd_num = sizeof(builtin_cmds) / sizeof(builtin_cmd_t);
@@ -28,6 +28,6 @@ void print_help() {
     printf("exec      <module>       Load a user application.\n");
 }
 
-void shell_exit(){
+void shell_exit() {
     exit(0);
 }

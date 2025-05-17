@@ -1,11 +1,11 @@
 #include "string.h"
 #define STB_SPRINTF_IMPLEMENTATION
+#include "posix.h"
 #include "sprintf.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "posix.h"
 
-extern int main(int argc, char**argv);
+extern int main(int argc, char **argv);
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,24 +19,24 @@ int stdin;
 void puts(const char *s) {
     write(stdout, (uint8_t *)s, strlen(s));
     char cp = '\n';
-    write(stdout, (uint8_t*)&cp, 1);
+    write(stdout, (uint8_t *)&cp, 1);
 }
 
 void putc(const char c) {
     char cp = c;
-    write(stdout, (uint8_t*)&cp, 1);
+    write(stdout, (uint8_t *)&cp, 1);
 }
 
-void putchar(const char c){
+void putchar(const char c) {
     char cp = c;
-    write(stdout, (uint8_t*)&cp, 1);
+    write(stdout, (uint8_t *)&cp, 1);
 }
 
-int getchar(){
+int getchar() {
     char c;
-    read(stdin, (uint8_t*)&c, 1);
+    read(stdin, (uint8_t *)&c, 1);
     char buf[2] = {0};
-    buf[0] = c;
+    buf[0]      = c;
     debug_print(&buf);
     return c;
 }

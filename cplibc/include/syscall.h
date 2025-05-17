@@ -1,7 +1,7 @@
 #pragma once
 
-#include "stdint.h"
 #include "stddef.h"
+#include "stdint.h"
 #include "stdlib.h"
 
 #define __syscall0(id)                                                                             \
@@ -76,7 +76,7 @@
         ssize_t          __arg3             = (ssize_t)(arg3);                                     \
         ssize_t          __arg4             = (ssize_t)(arg4);                                     \
         ssize_t          __arg5             = (ssize_t)(arg5);                                     \
-        register ssize_t _a5 __asm__("r8") = __arg5;                                              \
+        register ssize_t _a5 __asm__("r8")  = __arg5;                                              \
         register ssize_t _a4 __asm__("r10") = __arg4;                                              \
         register ssize_t _a3 __asm__("rdx") = __arg3;                                              \
         register ssize_t _a2 __asm__("rsi") = __arg2;                                              \
@@ -88,7 +88,7 @@
         rets;                                                                                      \
     })
 
-#define __syscall6(id, arg1, arg2, arg3, arg4, arg5, arg6)                                               \
+#define __syscall6(id, arg1, arg2, arg3, arg4, arg5, arg6)                                         \
     ({                                                                                             \
         ssize_t          rets;                                                                     \
         ssize_t          __arg1             = (ssize_t)(arg1);                                     \
@@ -96,9 +96,9 @@
         ssize_t          __arg3             = (ssize_t)(arg3);                                     \
         ssize_t          __arg4             = (ssize_t)(arg4);                                     \
         ssize_t          __arg5             = (ssize_t)(arg5);                                     \
-        ssize_t          __arg6             = (ssize_t)(arg6);                                    \
-        register ssize_t _a6 __asm__("r9") = __arg6;                                              \
-        register ssize_t _a5 __asm__("r8") = __arg5;                                              \
+        ssize_t          __arg6             = (ssize_t)(arg6);                                     \
+        register ssize_t _a6 __asm__("r9")  = __arg6;                                              \
+        register ssize_t _a5 __asm__("r8")  = __arg5;                                              \
         register ssize_t _a4 __asm__("r10") = __arg4;                                              \
         register ssize_t _a3 __asm__("rdx") = __arg3;                                              \
         register ssize_t _a2 __asm__("rsi") = __arg2;                                              \

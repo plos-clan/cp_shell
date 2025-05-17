@@ -1,7 +1,7 @@
-#include "stdarg.h"
-#include "stdlib.h"
 #include "sprintf.h"
 #include "posix.h"
+#include "stdarg.h"
+#include "stdlib.h"
 
 extern int stdout;
 extern int stdin;
@@ -16,7 +16,7 @@ int sprintf(char *buf, char const *fmt, ...) {
 }
 
 int printf(const char *fmt, ...) {
-    char buf[2048];
+    char    buf[2048];
     va_list args;
     va_start(args, fmt);
     int len = stbsp_vsprintf(buf, fmt, args);

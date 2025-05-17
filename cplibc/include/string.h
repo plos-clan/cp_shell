@@ -1,8 +1,8 @@
 #pragma once
 
-#include "stdint.h"
-#include "stddef.h"
 #include "limits.h"
+#include "stddef.h"
+#include "stdint.h"
 
 int memcmp(const void *a_, const void *b_, size_t size);
 

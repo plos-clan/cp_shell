@@ -1,11 +1,12 @@
-#include "stdint.h"
 #include "syscall.h"
 #include "posix.h"
+#include "stdint.h"
 #include "string.h"
 
 _Noreturn void exit(int code) {
     __syscall(0, code);
-    while (1);
+    while (1)
+        ;
 }
 
 int open(const char *path) {
@@ -21,7 +22,7 @@ int read(int handle, uint8_t *buf, int len) {
 }
 
 void *mmap(void *addr, size_t length, uint64_t prot, uint64_t flags, int fd, uint64_t offset) {
-    return (void*)__syscall6(SYSCALL_MMAP, addr, length, prot, flags, fd, offset);
+    return (void *)__syscall6(SYSCALL_MMAP, addr, length, prot, flags, fd, offset);
 }
 
 void signal_register(int sig, void (*handler)(void)) {
@@ -29,7 +30,7 @@ void signal_register(int sig, void (*handler)(void)) {
 }
 
 void *arch_prctl(int code, void *addr) {
-    return (void *) __syscall(SYSCALL_ARCH_PRCTL, code, addr);
+    return (void *)__syscall(SYSCALL_ARCH_PRCTL, code, addr);
 }
 
 void yield() {

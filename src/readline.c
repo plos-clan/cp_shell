@@ -23,19 +23,19 @@ static int plreadln_getch(void) {
         if (ch == '[') {
             ch = plreadln_getch();
             switch (ch) {
-                case 'A': return PL_READLINE_KEY_UP;
-                case 'B': return PL_READLINE_KEY_DOWN;
-                case 'C': return PL_READLINE_KEY_RIGHT;
-                case 'D': return PL_READLINE_KEY_LEFT;
-                case 'H': return PL_READLINE_KEY_HOME;
-                case 'F': return PL_READLINE_KEY_END;
-                case '5':
-                    if (plreadln_getch() == '~') return PL_READLINE_KEY_PAGE_UP;
-                    break;
-                case '6':
-                    if (plreadln_getch() == '~') return PL_READLINE_KEY_PAGE_DOWN;
-                    break;
-                default: return -1;
+            case 'A': return PL_READLINE_KEY_UP;
+            case 'B': return PL_READLINE_KEY_DOWN;
+            case 'C': return PL_READLINE_KEY_RIGHT;
+            case 'D': return PL_READLINE_KEY_LEFT;
+            case 'H': return PL_READLINE_KEY_HOME;
+            case 'F': return PL_READLINE_KEY_END;
+            case '5':
+                if (plreadln_getch() == '~') return PL_READLINE_KEY_PAGE_UP;
+                break;
+            case '6':
+                if (plreadln_getch() == '~') return PL_READLINE_KEY_PAGE_DOWN;
+                break;
+            default: return -1;
             }
         }
     }
@@ -44,11 +44,11 @@ static int plreadln_getch(void) {
 
 static void handle_tab(char *buf, pl_readline_words_t words) {
     for (int i = 0; i < builtin_cmd_num; ++i) {
-        pl_readline_word_maker_add((char *)builtin_cmds[i].name, words,i == 0, 1, ' ');
+        pl_readline_word_maker_add((char *)builtin_cmds[i].name, words, i == 0, 1, ' ');
     }
 }
 
-pl_readline_t setup_readline(){
+pl_readline_t setup_readline() {
     pl_readline_t pl = pl_readline_init(plreadln_getch, plreadln_putch, plreadln_flush, handle_tab);
     return pl;
 }

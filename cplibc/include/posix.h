@@ -3,10 +3,10 @@
 #define MAP_ANONYMOUS 32
 #define MAP_FIXED     16
 
-#define PROT_NONE 0x00
-#define PROT_READ 0x01
+#define PROT_NONE  0x00
+#define PROT_READ  0x01
 #define PROT_WRITE 0x02
-#define PROT_EXEC 0x04
+#define PROT_EXEC  0x04
 
 #define SIGHUP  1  // Hangup (终端断开)
 #define SIGINT  2  // Interrupt (Ctrl+C)
@@ -35,8 +35,8 @@
 #define ARCH_SET_GS 0x1004
 #define ARCH_GET_GS 0x1005
 
-#include "stdint.h"
 #include "stddef.h"
+#include "stdint.h"
 
 int open(const char *path);
 

@@ -1,8 +1,8 @@
-#include "stdio.h"
 #include "pl_readline.h"
-#include "shell.h"
-#include "string.h"
 #include "posix.h"
+#include "shell.h"
+#include "stdio.h"
+#include "string.h"
 
 #ifndef GIT_VERSION
 #    define GIT_VERSION "unknown"
@@ -43,25 +43,23 @@ static int cmd_parse(const char *cmd_str, char **argv,
     return argc;
 }
 
-void int_handle(){
+void int_handle() {
     printf("Signal Interrupt.\n");
 }
 
 extern int stdin;
 
 __attribute__((naked)) uint64_t read_fs_offset0() {
-    __asm__ volatile (
-            "movq %%fs:0, %%rax\n"
-            "ret"
-            :
-            :
-            : "rax"
-            );
+    __asm__ volatile("movq %%fs:0, %%rax\n"
+                     "ret"
+                     :
+                     :
+                     : "rax");
 }
 
-int main(int argc, char**argv){
+int main(int argc, char **argv) {
     int ppb = 314;
-    arch_prctl(ARCH_SET_FS, (void*)&ppb);
+    arch_prctl(ARCH_SET_FS, (void *)&ppb);
     int a = (int)read_fs_offset0();
     printf("FS: %d\n", a);
     yield();
@@ -69,9 +67,9 @@ int main(int argc, char**argv){
     printf("Welcome to CoolPotOS Shell (git:%s)\n", GIT_VERSION);
     printf("Type 'help' to see the list of commands.\n");
     pl_readline_t pl = setup_readline();
-    uint8_t *argv0[MAX_ARG_NR];
+    uint8_t      *argv0[MAX_ARG_NR];
 
-    while (true){
+    while (true) {
         const char *cmd = pl_readline(pl, "Shell > ");
         if (cmd[0] == 0) continue;
         int argc = cmd_parse(cmd, (char **)argv0, ' ');

@@ -3,8 +3,8 @@
 #include "alloc/block.h"
 #include "alloc/freelist.h"
 #include "alloc/large-blk.h"
-#include "string.h"
 #include "stdlib.h"
+#include "string.h"
 
 // mman_free 中使用的临时函数
 // 用于将内存块从空闲链表中分离
