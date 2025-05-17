@@ -49,7 +49,23 @@ void int_handle(){
 
 extern int stdin;
 
+__attribute__((naked)) uint64_t read_fs_offset0() {
+    __asm__ volatile (
+            "movq %%fs:0, %%rax\n"
+            "ret"
+            :
+            :
+            : "rax"
+            );
+}
+
 int main(int argc, char**argv){
+    int ppb = 314;
+    arch_prctl(ARCH_SET_FS, (void*)&ppb);
+    int a = (int)read_fs_offset0();
+    printf("FS: %d\n", a);
+    yield();
+
     printf("Welcome to CoolPotOS Shell (git:%s)\n", GIT_VERSION);
     printf("Type 'help' to see the list of commands.\n");
     pl_readline_t pl = setup_readline();

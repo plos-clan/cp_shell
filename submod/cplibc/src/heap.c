@@ -71,6 +71,6 @@ void *pvalloc(size_t size) {
 void init_heap() {
     uint64_t start_addr = 0x0000100000000000;
     size_t size  = 0x800000;
-    mmap((void*)start_addr, size, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_ANONYMOUS);
+    mmap((void*)start_addr, size, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_ANONYMOUS,0,0);
     mpool_init(&pool, (void*)start_addr, size);
 }

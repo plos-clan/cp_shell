@@ -20,12 +20,20 @@ int read(int handle,uint8_t *buf,int len){
     return __syscall(SYSCALL_READ,handle,buf,len);
 }
 
-void mmap(void *addr,size_t length,uint64_t prot,uint64_t flags){
-    __syscall(SYSCALL_MMAP,addr,length,prot,flags);
+void mmap(void *addr,size_t length,uint64_t prot,uint64_t flags,int fd,uint64_t offset){
+    __syscall6(SYSCALL_MMAP,addr,length,prot,flags, fd, offset);
 }
 
 void signal_register(int sig,void (*handler)(void)){
     __syscall(SYSCALL_SIGNAL,sig,handler);
+}
+
+void *arch_prctl(int code, void *addr){
+    return (void*)__syscall(SYSCALL_ARCH_PRCTL,code,addr);
+}
+
+void yield(){
+    __syscall(SYSCALL_YIELD,0);
 }
 
 void debug_print(char *str){

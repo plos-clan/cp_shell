@@ -30,13 +30,19 @@
 #define SIGTTIN 21 // Background read from tty
 #define SIGTTOU 22 // Background write to tty
 
+#define ARCH_SET_FS 0x1002
+#define ARCH_GET_FS 0x1003
+#define ARCH_SET_GS 0x1004
+#define ARCH_GET_GS 0x1005
+
 #include "stdint.h"
 #include "stddef.h"
 
 int open(const char*path);
 int write(int handle,uint8_t *buf,int len);
 int read(int handle,uint8_t *buf,int len);
-void mmap(void *addr,size_t length,uint64_t prot,uint64_t flags);
+void mmap(void *addr,size_t length,uint64_t prot,uint64_t flags,int fd,uint64_t offset);
 void signal_register(int sig,void (*handler)(void));
-
+void *arch_prctl(int code, void *addr);
+void yield();
 void debug_print(char *str);
