@@ -62,6 +62,11 @@ int main(int argc, char **argv) {
     arch_prctl(ARCH_SET_FS, (void *)&ppb);
     int a = (int)read_fs_offset0();
     printf("FS: %d\n", a);
+
+    for (int i = 0; i < argc; i++) {
+        printf("argv[%d]: %s\n", i, argv[i]);
+    }
+
     yield();
 
     printf("Welcome to CoolPotOS Shell (git:%s)\n", GIT_VERSION);

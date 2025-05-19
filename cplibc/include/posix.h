@@ -53,3 +53,5 @@ void *arch_prctl(int code, void *addr);
 void yield();
 
 void debug_print(char *str);
+
+int cmdline(uint8_t *buf);

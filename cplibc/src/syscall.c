@@ -40,3 +40,7 @@ void yield() {
 void debug_print(char *str) {
     __syscall(SYSCALL_DEBUG_PRINT, str, strlen(str));
 }
+
+int cmdline(uint8_t *buf) {
+    return __syscall(SYSCALL_CMDLINE, buf);
+}
