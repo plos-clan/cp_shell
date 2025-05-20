@@ -4,7 +4,7 @@
 #include "string.h"
 
 _Noreturn void exit(int code) {
-    __syscall(0, code);
+    __syscall(SYSCALL_EXIT, code);
     while (1)
         ;
 }
