@@ -1,7 +1,8 @@
 #pragma once
 
 #include "alloc.h"
-#include "ctype.h"
+#include "stdint.h"
+#include "stddef.h"
 
 #if SIZE_MAX < UINT32_MAX
 #    error "The size of size_t is too small."

@@ -57,19 +57,26 @@ __attribute__((naked)) uint64_t read_fs_offset0() {
                      : "rax");
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv, char **envp) {
     int ppb = 314;
     arch_prctl(ARCH_SET_FS, (void *)&ppb);
     int a = (int)read_fs_offset0();
     printf("FS: %d\n", a);
 
+    printf("argc: %d\n", argc);
     for (int i = 0; i < argc; i++) {
-        printf("argv[%d]: %s\n", i, argv[i]);
+        printf("argv[%d]: %s ", i, argv[i]);
     }
+    putchar('\n');
+    for (char **e = envp; *e; e++) {
+        const char *p = *e;
+        printf("envp: %s ", p);
+    }
+    putchar('\n');
 
     yield();
 
-    printf("Welcome to CoolPotOS Shell (git:%s)\n", GIT_VERSION);
+    printf("Welcome to CoolPotOS Shell v0.0.1 (git:%s)\n", GIT_VERSION);
     printf("Type 'help' to see the list of commands.\n");
     pl_readline_t pl = setup_readline();
     uint8_t      *argv0[MAX_ARG_NR];
