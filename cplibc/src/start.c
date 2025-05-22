@@ -42,7 +42,8 @@ int getchar() {
 }
 
 void _libc_cp_kernel_start(int argc,char **argv,char **envp) {
-    stdin = stdout = open("/dev/stdio");
+    stdin = 0;
+    stdout = 1;
     init_heap();
 
     int exit_code = main(argc, argv, envp);
